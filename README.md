@@ -8,7 +8,7 @@ docker run \
     --restart unless-stopped \
     -p 8082:8080 \
     -e VNC_PASS=CHANGE_IT \
-    -d alone/grass-miner
+    -d alone/grass
 ```
 
 操作步骤:

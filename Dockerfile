@@ -4,7 +4,7 @@ LABEL AboutImage="Grass miner"
 LABEL Maintainer="Alone <hi@anlo.ng>"
 
 ENV	VNC_PASS="CHANGE_IT" \
-	VNC_TITLE="Grass miner (Referral code: IlJGw0ovdrhi_mk)" \
+	VNC_TITLE="Grass (Referral code: IlJGw0ovdrhi_mk)" \
 	VNC_RESOLUTION="360x640" \
 	VNC_SHARED=false \
 	DEB_PATH="grass_4.28.2_amd64.deb" \
