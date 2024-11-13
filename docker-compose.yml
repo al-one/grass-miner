@@ -1,0 +1,9 @@
+services:
+  grass:
+    container_name: grass
+    restart: unless-stopped
+    image: alone/grass
+    ports:
+      - "${HOST_PORT-8082}:8080/tcp"
+    environment:
+      - VNC_PASS=${VNC_PASS-CHANGE_IT}
