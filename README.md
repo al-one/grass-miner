@@ -7,6 +7,7 @@ docker run \
     --name grass \
     --restart unless-stopped \
     -p 8082:8080 \
+    -v ~/.local/share:/root/.local/share \
     -e VNC_PASS=CHANGE_IT \
     -d alone/grass
 ```
