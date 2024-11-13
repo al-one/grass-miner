@@ -44,4 +44,4 @@ jobs:
           context: .
           platforms: linux/amd64
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/grass:${{ steps.vars.outputs.tag }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/grass:latest
