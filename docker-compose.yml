@@ -5,5 +5,7 @@ services:
     image: alone/grass
     ports:
       - "${HOST_PORT-8082}:8080/tcp"
+    volumes:
+      - ~/.local/share:/root/.local/share
     environment:
       - VNC_PASS=${VNC_PASS-CHANGE_IT}
