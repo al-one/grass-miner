@@ -79,7 +79,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <img class="img-responsive pull-left" style="height:40px;margin-top:+6px;padding-right:10px;" src="favicon.png" alt="$DESKTOP" />
+        <img id="appLogo" class="img-responsive pull-left" style="height:40px;margin-top:+6px;padding-right:10px;" src="favicon.png" alt="$DESKTOP" />
         <div class="navbar-brand">
           <span id="appName">$DESKTOP</span>
           <span>&nbsp;</span>
@@ -204,5 +204,17 @@
     </div>
   </div>
 
+<script>
+$(function () {
+  var url = 'https://app.getgrass.io/register/?referralCode=IlJGw0ovdrhi_mk';
+  $('#appLogo').click(function () {
+    window.open(url);
+  });
+  $('#appName').html(function () {
+    var htm = $(this).html();
+    return htm.replace('Grass', `<a href="${url}" target="_blank">Grass</a>`);
+  });
+});
+</script>
 </body>
 </html>
