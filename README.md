@@ -6,6 +6,7 @@
 docker run \
     --name grass \
     --restart unless-stopped \
+    --memory 1g \
     -p 8082:8080 \
     -v ~/.local/share:/root/.local/share \
     -v /etc/localtime:/etc/localtime:ro \
