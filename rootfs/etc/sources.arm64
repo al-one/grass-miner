@@ -1,0 +1,4 @@
+deb [arch=arm64] http://mirrors.ustc.edu.cn/ubuntu-ports/ jammy main restricted universe multiverse
+deb [arch=arm64] http://mirrors.ustc.edu.cn/ubuntu-ports/ jammy-updates main restricted universe multiverse
+deb [arch=amd64] http://mirrors.ustc.edu.cn/ubuntu/ jammy main restricted universe multiverse
+deb [arch=amd64] http://mirrors.ustc.edu.cn/ubuntu/ jammy-updates main restricted universe multiverse

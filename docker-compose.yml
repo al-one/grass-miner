@@ -9,3 +9,4 @@ services:
       - ~/.local/share:/root/.local/share
     environment:
       - VNC_PASS=${VNC_PASS-CHANGE_IT}
+    privileged: true
