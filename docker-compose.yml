@@ -7,6 +7,7 @@ services:
       - "${HOST_PORT-8082}:8080/tcp"
     volumes:
       - ~/.local/share:/root/.local/share
+      - /etc/localtime:/etc/localtime:ro
     environment:
       - VNC_PASS=${VNC_PASS-CHANGE_IT}
     mem_limit: 1g
