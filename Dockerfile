@@ -17,8 +17,8 @@ ENV	VNC_PASS="CHANGE_IT" \
 COPY rootfs/ /
 
 RUN set -eux; \
-    sed -i 's@//.*archive.ubuntu.com@//mirrors.ustc.edu.cn@g' /etc/apt/sources.list; \
-    sed -i 's@//ports.ubuntu.com@//mirrors.ustc.edu.cn@g' /etc/apt/sources.list; \
+    # sed -i 's@//.*archive.ubuntu.com@//mirrors.ustc.edu.cn@g' /etc/apt/sources.list; \
+    # sed -i 's@//ports.ubuntu.com@//mirrors.ustc.edu.cn@g' /etc/apt/sources.list; \
     apt update; \
    	apt install -y wget supervisor xvfb x11vnc websockify openbox; \
     \
