@@ -11,7 +11,7 @@ docker run \
     -v ~/.local/share:/root/.local/share \
     -v /etc/localtime:/etc/localtime:ro \
     -e VNC_PASS=CHANGE_IT \
-    -d alone/grass
+    -d ccr.ccs.tencentyun.com/alone/grass
 ```
 
 > 如遇到打不开Grass桌面客户端，可尝试使用特权模式(`--privileged`)运行容器。
