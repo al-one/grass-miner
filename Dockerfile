@@ -3,16 +3,16 @@ FROM ubuntu:22.04
 LABEL AboutImage="Grass miner"
 LABEL Maintainer="Alone <hi@anlo.ng>"
 
-ENV	VNC_PASS="CHANGE_IT" \
-	VNC_TITLE="Grass (Referral code: IlJGw0ovdrhi_mk)" \
-	VNC_RESOLUTION="360x640" \
-	VNC_SHARED=false \
-	PORT=8080 \
-	DISPLAY=:0 \
-	LANG=en_US.UTF-8 \
-	LANGUAGE=en_US.UTF-8 \
-	LC_ALL=C.UTF-8 \
-	DEB_PATH="Grass_4.31.2_amd64.deb"
+ENV VNC_PASS="CHANGE_IT" \
+    VNC_TITLE="Grass (Referral code: IlJGw0ovdrhi_mk)" \
+    VNC_RESOLUTION="360x640" \
+    VNC_SHARED=false \
+    PORT=8080 \
+    DISPLAY=:0 \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    DEB_PATH="Grass_4.32.0_amd64.deb"
 
 COPY rootfs/ /
 
