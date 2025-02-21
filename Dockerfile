@@ -24,7 +24,7 @@ RUN set -eux; \
     \
     arch=$(uname -m); \
     if [ "$arch" = "arm64" ] || [ "$arch" = "aarch64" ]; then \
-        apt install -y qemu-user-static; \
+        apt install -y qemu-user-static libc-bin; \
         update-binfmts --enable qemu-x86_64; \
         dpkg --add-architecture amd64; \
         cat /etc/sources.arm64 > /etc/apt/sources.list; \
