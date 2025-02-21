@@ -29,7 +29,7 @@ RUN set -eux; \
         dpkg --add-architecture amd64; \
         cat /etc/sources.arm64 > /etc/apt/sources.list; \
         apt update; \
-        apt install -y libc6:amd64 fuse:amd64 libayatana-appindicator3-1:amd64 libwebkit2gtk-4.1-0:amd64; \
+        apt install -y libc6:amd64 fuse:amd64 libayatana-appindicator3-1:amd64 libwebkit2gtk-4.1-0:amd64 libgdk-pixbuf-2.0-0:arm64; \
     else \
         apt install -y fuse libayatana-appindicator3-1 libwebkit2gtk-4.1-0; \
     fi; \
