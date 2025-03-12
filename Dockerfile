@@ -13,7 +13,7 @@ ENV VNC_PASS="CHANGE_IT" \
     LANGUAGE=en_US.UTF-8 \
     LC_ALL=C.UTF-8 \
     TZ=Asia/Shanghai \
-    DEB_PATH="Grass_5.1.1_amd64.deb"
+    DEB_PATH="Grass_5.2.0_amd64.deb"
 
 COPY rootfs/ /
 
