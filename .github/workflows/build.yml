@@ -1,13 +1,43 @@
 name: Build and Push Docker Image
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: Version
+        required: false
+        default: ''
+  schedule:
+    - cron: "0 20 */2 * *"
 
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - name: Docker tags
+        run: |
+          tags="type=raw,value=latest"
+          if [ -n "${{ github.event.inputs.version }}" ]; then
+            tags=$({
+              echo "$tags"
+              echo "type=raw,value=${{ github.event.inputs.version }}"
+            })
+          fi
+          {
+            echo 'ALL_TAGS<<EOF'
+            echo "$tags"
+            echo EOF
+          } >> $GITHUB_ENV
 
-      - name: Checkout
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ secrets.DOCKER_USERNAME }}/grass
+            ccr.ccs.tencentyun.com/${{ secrets.DOCKER_USERNAME }}/grass
+          tags: ${{ env.ALL_TAGS }}
+
+      - name: Checkout code
         uses: actions/checkout@v4
       
       - name: Set up QEMU
@@ -40,8 +70,9 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: linux/amd64 #,linux/arm64
           push: true
-          tags: |
-            ${{ secrets.DOCKER_USERNAME }}/grass:latest
-            ccr.ccs.tencentyun.com/${{ secrets.DOCKER_USERNAME }}/grass:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          annotations: ${{ steps.meta.outputs.annotations }}
+          build-args: |
+            APP_VERSION=${{ github.event.inputs.version }}
+          platforms: linux/amd64 #,linux/arm64

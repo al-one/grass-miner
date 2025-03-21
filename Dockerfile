@@ -3,6 +3,7 @@ FROM ubuntu:22.04
 LABEL AboutImage="Grass miner"
 LABEL Maintainer="Alone <hi@anlo.ng>"
 
+ARG APP_VERSION
 ENV VNC_PASS="CHANGE_IT" \
     VNC_TITLE="Grass (Referral code: IlJGw0ovdrhi_mk)" \
     VNC_RESOLUTION="360x640" \
@@ -13,7 +14,7 @@ ENV VNC_PASS="CHANGE_IT" \
     LANGUAGE=en_US.UTF-8 \
     LC_ALL=C.UTF-8 \
     TZ=Asia/Shanghai \
-    DEB_PATH="Grass_5.2.0_amd64.deb"
+    VER_JSON="https://files.getgrass.io/file/grass-extension-upgrades/desktop-installer-latest.json"
 
 COPY rootfs/ /
 
@@ -21,9 +22,9 @@ RUN set -eux; \
     sed -i 's@//.*archive.ubuntu.com@//mirrors.ustc.edu.cn@g' /etc/apt/sources.list; \
     sed -i 's@//ports.ubuntu.com@//mirrors.ustc.edu.cn@g' /etc/apt/sources.list; \
     apt update; \
-    apt install -y tzdata; \
+    apt install -y tzdata ca-certificates; \
     cat /usr/share/zoneinfo/$TZ > /etc/localtime; \
-   	apt install -y wget supervisor xvfb x11vnc websockify openbox ca-certificates aptitude; \
+   	apt install -y curl jq supervisor xvfb x11vnc websockify openbox aptitude; \
     \
     arch=$(uname -m); \
     if [ "$arch" = "arm64" ] || [ "$arch" = "aarch64" ]; then \
@@ -36,9 +37,16 @@ RUN set -eux; \
     else \
         apt install -y fuse libayatana-appindicator3-1 libwebkit2gtk-4.1-0 libgtk-3-0; \
     fi; \
-    wget https://files.getgrass.io/file/grass-extension-upgrades/ubuntu-22.04/$DEB_PATH; \
-    dpkg -i $DEB_PATH; \
-    rm -f $DEB_PATH; \
+    if [ -n "$APP_VERSION" ]; then \
+        DEB_NAME="Grass_${APP_VERSION}_amd64.deb"; \
+        DEB_PATH=https://files.getgrass.io/file/grass-extension-upgrades/ubuntu-22.04/$DEB_NAME; \
+    else \
+        DEB_NAME='grass.deb'; \
+        DEB_PATH=$(curl -s "$VER_JSON" | jq '.platforms."linux-x86_64".url'); \
+    fi; \
+    curl -fL -o $DEB_NAME $DEB_PATH; \
+    dpkg -i $DEB_NAME; \
+    rm -f $DEB_NAME; \
 	openssl req -new -newkey rsa:4096 -days 36500 -nodes -x509 -subj "/C=IN/O=Dis/CN=www.google.com" \
                 -keyout /etc/ssl/novnc.key -out /etc/ssl/novnc.cert > /dev/null 2>&1; \
 	chmod a+x /entrypoint.sh;
