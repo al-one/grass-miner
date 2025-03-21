@@ -16,8 +16,12 @@ docker run \
 
 > 如遇到打不开Grass桌面客户端，可尝试使用特权模式(`--privileged`)运行容器。
 
+### 可用镜像
+- ghcr.nju.edu.cn/al-one/grass
+- ccr.ccs.tencentyun.com/alone/grass
+- alone/grass
 
-操作步骤:
+### 操作步骤:
 1. 注册Grass账号
    - https://app.getgrass.io/register/?referralCode=IlJGw0ovdrhi_mk
    - 邀请码: `IlJGw0ovdrhi_mk`
