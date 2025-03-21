@@ -30,6 +30,8 @@ jobs:
           {
             echo 'ALL_TAGS<<EOF'
             echo "$tags"
+            echo "type=raw,value=${ver%.*}"
+            echo "type=raw,value=${ver%.*.*}"
             echo EOF
           } >> $GITHUB_ENV
 
