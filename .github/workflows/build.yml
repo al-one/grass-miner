@@ -19,7 +19,7 @@ jobs:
           if [ -n "$ver" ]; then
             tags="type=raw,value=$ver"
           else
-            ver=$(curl -s https://files.getgrass.io/file/grass-extension-upgrades/desktop-installer-latest.json | jq '.version')
+            ver=$(curl -s https://files.getgrass.io/file/grass-extension-upgrades/desktop-installer-latest.json | jq -r '.version')
             ver=${ver/v/}
             tags=$({
               echo "type=raw,value=$ver"

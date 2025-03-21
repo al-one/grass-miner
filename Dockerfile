@@ -42,7 +42,7 @@ RUN set -eux; \
         DEB_PATH=https://files.getgrass.io/file/grass-extension-upgrades/ubuntu-22.04/$DEB_NAME; \
     else \
         DEB_NAME='grass.deb'; \
-        DEB_PATH=$(curl -s "$VER_JSON" | jq '.platforms."linux-x86_64".url'); \
+        DEB_PATH=$(curl -s "$VER_JSON" | jq -r '.platforms."linux-x86_64".url'); \
     fi; \
     curl -fL -o $DEB_NAME $DEB_PATH; \
     dpkg -i $DEB_NAME; \
