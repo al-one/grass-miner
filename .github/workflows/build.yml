@@ -15,13 +15,18 @@ jobs:
     steps:
       - name: Docker tags
         run: |
-          tags="type=raw,value=latest"
-          if [ -n "${{ github.event.inputs.version }}" ]; then
+          ver="${{ github.event.inputs.version }}"
+          if [ -n "$ver" ]; then
+            tags="type=raw,value=$ver"
+          else
+            ver=$(curl -s https://files.getgrass.io/file/grass-extension-upgrades/desktop-installer-latest.json | jq '.version')
+            ver=${ver/v/}
             tags=$({
-              echo "$tags"
-              echo "type=raw,value=${{ github.event.inputs.version }}"
+              echo "type=raw,value=$ver"
+              echo "type=raw,value=latest"
             })
           fi
+          echo "VERSION=$ver" >> $GITHUB_ENV
           {
             echo 'ALL_TAGS<<EOF'
             echo "$tags"
@@ -34,6 +39,7 @@ jobs:
         with:
           images: |
             ${{ secrets.DOCKER_USERNAME }}/grass
+            ghcr.io/${{ github.repository_owner }}/grass
             ccr.ccs.tencentyun.com/${{ secrets.DOCKER_USERNAME }}/grass
           tags: ${{ env.ALL_TAGS }}
 
@@ -74,5 +80,5 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           annotations: ${{ steps.meta.outputs.annotations }}
           build-args: |
-            APP_VERSION=${{ github.event.inputs.version }}
+            APP_VERSION=${{ env.VERSION }}
           platforms: linux/amd64 #,linux/arm64
