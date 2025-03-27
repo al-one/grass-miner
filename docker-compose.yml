@@ -2,7 +2,7 @@ services:
   grass:
     container_name: grass
     restart: unless-stopped
-    image: alone/grass
+    image: ccr.ccs.tencentyun.com/alone/grass
     ports:
       - "${HOST_PORT-8082}:8080/tcp"
     volumes:
@@ -10,5 +10,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
     environment:
       - VNC_PASS=${VNC_PASS-CHANGE_IT}
-    mem_limit: 1g
+    # cpus: 1
+    # mem_limit: 1g
     privileged: true

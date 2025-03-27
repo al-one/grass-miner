@@ -2,7 +2,7 @@
 
 [Grass](https://app.getgrass.io/register/?referralCode=IlJGw0ovdrhi_mk)为用户提供了一种利用闲置的网络资源进行挖矿的新途径。
 
-```sh
+```bash
 docker run \
     --name grass \
     --restart unless-stopped \
