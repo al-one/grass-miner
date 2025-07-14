@@ -7,7 +7,7 @@ on:
         required: false
         default: ''
   schedule:
-    - cron: "0 20 */2 * *"
+    - cron: "0 20 */5 * *"
 
 jobs:
   docker:
