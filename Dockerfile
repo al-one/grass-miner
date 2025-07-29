@@ -39,7 +39,7 @@ RUN set -eux; \
     fi; \
     if [ -n "$APP_VERSION" ]; then \
         DEB_NAME="Grass_${APP_VERSION}_amd64.deb"; \
-        DEB_PATH=https://files.getgrass.io/file/grass-extension-upgrades/ubuntu-22.04/$DEB_NAME; \
+        DEB_PATH=https://files.getgrass.io/file/grass-extension-upgrades/v${APP_VERSION}/$DEB_NAME; \
     else \
         DEB_NAME='grass.deb'; \
         DEB_PATH=$(curl -s "$VER_JSON" | jq -r '.platforms."linux-x86_64".url'); \
