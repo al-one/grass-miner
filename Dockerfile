@@ -52,7 +52,7 @@ RUN set -eux; \
                 -keyout /etc/ssl/novnc.key -out /etc/ssl/novnc.cert > /dev/null 2>&1; \
 	chmod a+x /entrypoint.sh;
 
-COPY --from=metacubex/mihomo /mihomo /use/bin/
+COPY --from=metacubex/mihomo /mihomo /usr/bin/
 COPY --from=metacubex/mihomo /root/.config/mihomo/ /root/.config/mihomo/
 VOLUME [ "/root/.config/mihomo" ]
 
