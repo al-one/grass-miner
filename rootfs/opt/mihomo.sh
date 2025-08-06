@@ -8,5 +8,5 @@ if [ -z "$MIHOMO_CONFIG" ]; then
   exit 1
 fi
 
-curl -L "$MIHOMO_CONFIG" -o /root/.config/mihomo/config.yaml
-mihomo
+curl -L --noproxy "*" "$MIHOMO_CONFIG" -o /root/.config/mihomo/config.yaml
+mihomo -ext-ctl "0.0.0.0:9090"

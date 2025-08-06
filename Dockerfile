@@ -54,6 +54,6 @@ RUN set -eux; \
 
 COPY --from=metacubex/mihomo /mihomo /usr/bin/
 COPY --from=metacubex/mihomo /root/.config/mihomo/ /root/.config/mihomo/
-VOLUME [ "/root/.config/mihomo" ]
+VOLUME ["/root/.config/mihomo"]
 
 CMD ["/entrypoint.sh", "supervisord", "-l", "/var/log/supervisord.log", "-c", "/etc/supervisord.conf"]
