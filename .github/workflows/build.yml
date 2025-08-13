@@ -6,6 +6,10 @@ on:
         description: Version
         required: false
         default: ''
+      suffix:
+        description: Tag suffix
+        required: false
+        default: ''
   schedule:
     - cron: "0 20 */5 * *"
 
@@ -15,23 +19,27 @@ jobs:
     steps:
       - name: Docker tags
         run: |
+          suf="${{ github.event.inputs.suffix }}"
+          if [ -n "$suf" ]; then
+            suf="-$suf"
+          fi
           ver="${{ github.event.inputs.version }}"
           if [ -n "$ver" ]; then
-            tags="type=raw,value=$ver"
+            tags="type=raw,value=$ver$suf"
           else
             ver=$(curl -s https://files.getgrass.io/file/grass-extension-upgrades/desktop-installer-latest.json | jq -r '.version')
             ver=${ver/v/}
             tags=$({
-              echo "type=raw,value=$ver"
-              echo "type=raw,value=latest"
+              echo "type=raw,value=$ver$suf"
+              echo "type=raw,value=latest$suf"
             })
           fi
           echo "VERSION=$ver" >> $GITHUB_ENV
           {
             echo 'ALL_TAGS<<EOF'
             echo "$tags"
-            echo "type=raw,value=${ver%.*}"
-            echo "type=raw,value=${ver%.*.*}"
+            echo "type=raw,value=${ver%.*}$suf"
+            echo "type=raw,value=${ver%.*.*}$suf"
             echo EOF
           } >> $GITHUB_ENV
 

@@ -51,4 +51,7 @@ RUN set -eux; \
                 -keyout /etc/ssl/novnc.key -out /etc/ssl/novnc.cert > /dev/null 2>&1; \
 	chmod a+x /entrypoint.sh;
 
+COPY --from=ghcr.io/sagernet/sing-box /usr/local/bin/sing-box /usr/bin/
+VOLUME ["/var/lib/sing-box"]
+
 CMD ["/entrypoint.sh", "supervisord", "-l", "/var/log/supervisord.log", "-c", "/etc/supervisord.conf"]
